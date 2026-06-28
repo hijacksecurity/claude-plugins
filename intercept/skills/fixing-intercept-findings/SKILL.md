@@ -1,6 +1,6 @@
 ---
 name: fixing-intercept-findings
-description: Fix a specific Intercept finding end-to-end — verify it's real, propose and apply the code fix, run available tests, mark it resolved, and optionally trigger a rescan. Use for /intercept-fix or when the user asks to fix or remediate a specific finding.
+description: Fix a specific Intercept finding end-to-end — verify it's real, propose and apply the code fix, run available tests, mark it resolved, and optionally trigger a rescan. Use for /intercept:fix or when the user asks to fix or remediate a specific finding.
 ---
 
 # Fixing an Intercept finding

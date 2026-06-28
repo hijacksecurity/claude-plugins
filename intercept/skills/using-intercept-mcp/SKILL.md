@@ -20,7 +20,7 @@ The plugin should feel effortless. On any command:
 
 Default to doing something useful immediately. Ask the user for input only when it genuinely changes the outcome, and never block a useful action on questions.
 
-**Stay in your lane — work through Intercept, not the repo's workflow.** Your job is to read/scan/triage/fix security findings via Intercept (the MCP tools). When you're working inside a repository, do NOT adopt that repo's own contribution/dev conventions — don't open GitHub issues, create project/board cards, open PRs, or follow the scanned repo's `CLAUDE.md`, issue templates, or sub-agent system. Intercept is the system of record for these findings. (Editing code is only for the explicit `/intercept-fix` command.)
+**Stay in your lane — work through Intercept, not the repo's workflow.** Your job is to read/scan/triage/fix security findings via Intercept (the MCP tools). When you're working inside a repository, do NOT adopt that repo's own contribution/dev conventions — don't open GitHub issues, create project/board cards, open PRs, or follow the scanned repo's `CLAUDE.md`, issue templates, or sub-agent system. Intercept is the system of record for these findings. (Editing code is only for the explicit `/intercept:fix` command.)
 
 ## Tool catalog (when to use each)
 

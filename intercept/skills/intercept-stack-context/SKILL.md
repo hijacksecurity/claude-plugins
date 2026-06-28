@@ -1,6 +1,6 @@
 ---
 name: intercept-stack-context
-description: Establish what's security-relevant about this repo before an Intercept scan or hunt — detect the stack from the code, ask the platform (get_repo_context) what it already knows, and confirm only the gaps it can't infer. Never writes anything into the repo. Use at the start of /intercept-scan and /intercept-hunt, or when the user mentions where they deploy, what they build, or their cloud/runtime.
+description: Establish what's security-relevant about this repo before an Intercept scan or hunt — detect the stack from the code, ask the platform (get_repo_context) what it already knows, and confirm only the gaps it can't infer. Never writes anything into the repo. Use at the start of /intercept:scan and /intercept:hunt, or when the user mentions where they deploy, what they build, or their cloud/runtime.
 ---
 
 # Intercept stack context: detect → ask the platform → confirm
