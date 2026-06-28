@@ -17,15 +17,15 @@ first-class in your posture score and compliance.
 
 ```bash
 # 1. Add the marketplace and install the plugin
-claude plugin marketplace add hijacksecurity/intercept-claude-plugin
-claude plugin install intercept@intercept
+claude plugin marketplace add hijacksecurity/claude-plugins
+claude plugin install intercept@hijacksecurity
 
 # 2. Log in (no API key — OAuth browser login)
 /mcp          # opens a browser → log into Intercept → Approve
 
 # 3. See your posture, then scan
-/intercept-posture
-/intercept-scan
+/intercept:posture
+/intercept:scan
 ```
 
 That's it — no API key, no config. The plugin wires up the Intercept MCP server automatically;
@@ -34,18 +34,18 @@ in, what to scan) on their own.
 
 **New repo?** If the repo you're in isn't connected to Intercept yet, connect it once at
 [intercept.hijacksecurity.com](https://intercept.hijacksecurity.com) (Repositories → Connect).
-`/intercept-scan` will still review your code locally and upload the findings as soon as it's
+`/intercept:scan` will still review your code locally and upload the findings as soon as it's
 connected — it won't leave you stuck.
 
 ## Commands
 
 | Command | What it does |
 |---|---|
-| `/intercept-posture` | Score, grade, finding breakdown, and what's driving it |
-| `/intercept-scan` | Deep AI scan supplementing your scanners; records new findings |
-| `/intercept-triage` | Verify open findings, clear false positives, confirm real ones |
-| `/intercept-fix <finding>` | Fix a finding end-to-end and mark it resolved |
-| `/intercept-hunt <description>` | Natural-language hunt for a vulnerability class |
+| `/intercept:posture` | Score, grade, finding breakdown, and what's driving it |
+| `/intercept:scan` | Deep AI scan supplementing your scanners; records new findings |
+| `/intercept:triage` | Verify open findings, clear false positives, confirm real ones |
+| `/intercept:fix <finding>` | Fix a finding end-to-end and mark it resolved |
+| `/intercept:hunt <description>` | Natural-language hunt for a vulnerability class |
 
 ## How it works
 
@@ -53,7 +53,7 @@ connected — it won't leave you stuck.
 - **Supplements, never replaces.** If your finding matches a scanner finding, Intercept suppresses
   the duplicate and marks the scanner finding "Confirmed by AI" — so re-running is safe and
   focuses on what scanners missed.
-- **Stack-aware.** `/intercept-scan` detects your stack (Docker, Terraform/CDK, Vercel, CI),
+- **Stack-aware.** `/intercept:scan` detects your stack (Docker, Terraform/CDK, Vercel, CI),
   asks the platform what it already knows (`get_repo_context`), and asks you only the 1-2 things it
   genuinely can't infer (deploy target, prod vs staging, cloud-posture scope). It **never writes
   files into your repo** — the scan is read-only.
@@ -79,4 +79,4 @@ proactively consult Intercept on security-sensitive changes. Opt-in.
 
 ---
 
-Issues and feedback: <https://github.com/hijacksecurity/intercept-claude-plugin/issues>
+Issues and feedback: <https://github.com/hijacksecurity/claude-plugins/issues>

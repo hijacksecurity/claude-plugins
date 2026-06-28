@@ -8,7 +8,7 @@ Steps:
 1. Resolve the repo's `repository_id` and establish stack context.
 2. Decompose the hunt description into concrete things to look for, then read the relevant code paths end-to-end (entry point → sink), tracing actual behavior.
 3. Skip what's already known (`list_findings`), then write new findings with `report_ai_findings` — encode the hunt type in `rule_id` (e.g. `ai.hunt.ssrf`), correct category, honest severity, factual descriptions.
-4. Report what you found, where, and how confident; hand fixable ones to `/intercept-fix`.
+4. Report what you found, where, and how confident; hand fixable ones to `/intercept:fix`.
 
 What to hunt for: $ARGUMENTS
 
