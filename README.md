@@ -79,4 +79,4 @@ proactively consult Intercept on security-sensitive changes. Opt-in.
 
 ---
 
-Issues and feedback: <https://github.com/hijacksecurity/Intercept/issues>
+Issues and feedback: <https://github.com/hijacksecurity/intercept-claude-plugin/issues>
