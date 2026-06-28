@@ -1,7 +1,13 @@
 {
   "name": "intercept",
-  "owner": { "name": "Hijack Security", "url": "https://hijacksecurity.com" },
+  "owner": {
+    "name": "Hijack Security",
+    "url": "https://hijacksecurity.com"
+  },
   "plugins": [
-    { "name": "intercept", "source": "./intercept" }
+    {
+      "name": "intercept",
+      "source": "./intercept"
+    }
   ]
 }
