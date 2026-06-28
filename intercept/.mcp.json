@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "intercept": {
+      "type": "http",
+      "url": "https://intercept.hijacksecurity.com/mcp/"
+    }
+  }
+}
