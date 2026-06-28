@@ -1,6 +1,6 @@
 ---
 name: security-scanning-with-intercept
-description: Perform a deep, systematic AI security review of the whole application — security architecture and threat model, authentication and authorization, injection and input handling, cryptographic weaknesses, container images, live cloud and infra, CI/CD and supply chain, and business logic — by actively investigating what you and the user can access (pulling and inspecting images, querying live cloud read-only, running available tools), then writing confident findings back to Intercept. This is the core of the plugin. Use for /intercept-scan or any deep AI security scan/review/assessment tied to Intercept.
+description: Perform a deep, systematic AI security review of the whole application — security architecture and threat model, authentication and authorization, injection and input handling, cryptographic weaknesses, container images, live cloud and infra, CI/CD and supply chain, and business logic — by actively investigating what you and the user can access (pulling and inspecting images, querying live cloud read-only, running available tools), then writing confident findings back to Intercept. This is the core of the plugin. Use for /intercept:scan or any deep AI security scan/review/assessment tied to Intercept.
 ---
 
 # Deep AI security review with Intercept
@@ -9,12 +9,12 @@ This is the heart of the plugin. Intercept's rules-based scanners (opengrep, git
 
 Think deep. Apply complete, expert security knowledge. Cover the **full spectrum** — the simple/obvious issues *and* the advanced, insightful ones that take real expertise to see. Capture what you can stand behind as a real finding, and explain it clearly.
 
-**You decide what to look for — the user does not have to tell you.** This is the default mode: the user runs `/intercept-scan` (or just asks for a security scan) and you autonomously cover the whole range of security issues below, in depth. Don't wait to be pointed at a vulnerability class; that's the occasional `/intercept-hunt` case. By default, scan everything that matters and surface whatever you find.
+**You decide what to look for — the user does not have to tell you.** This is the default mode: the user runs `/intercept:scan` (or just asks for a security scan) and you autonomously cover the whole range of security issues below, in depth. Don't wait to be pointed at a vulnerability class; that's the occasional `/intercept:hunt` case. By default, scan everything that matters and surface whatever you find.
 
 Setup: load `using-intercept-mcp` (tools, the `resolution_id`/category rules, guardrails) and run `intercept-stack-context` (the stack, the access/tooling available, what the user consents to scan actively, and what Intercept already knows). Then read existing scanner findings as a dedup baseline: `get_repository_posture(repository_id)` + `list_findings(finding_type, repository_id, status="open")` per type — don't re-report what's known; the server suppresses duplicates anyway. Focus on the gaps.
 
 ## Keep it seamless — value first, never interrogate
-A user who runs `/intercept-scan` should get a valuable review immediately, with zero setup. So:
+A user who runs `/intercept:scan` should get a valuable review immediately, with zero setup. So:
 - **Do the baseline review right away** using what needs no permission — read the repo and do the full AppSec + architecture analysis below. This alone is high-value and requires nothing from the user.
 - **Active investigation (image pull, live cloud, running tools) is an optional enhancement, not a gate.** Offer it briefly when it would clearly add value and the access exists ("I can also build and inspect your image for vulnerable packages and base-image issues — want me to?"), but never stall the scan waiting for answers. If the user doesn't engage, complete the read-repo review and upload those findings.
 - **Ask at most a question or two**, only when it materially changes the scan. Use the answers for this scan; **do not write them to any file in the repo** (the platform is the memory — see `intercept-stack-context`). Default to the safe, no-consent-needed path.
@@ -101,9 +101,9 @@ Then summarize what you found by category/severity and confirm they're now in In
 Your job is to upload findings to Intercept. **Do NOT**, as part of a scan:
 - open GitHub issues, create project/board cards, or open PRs;
 - delegate to "service agents," sub-agents, or follow the **scanned repository's own** contribution/dev workflow, `CLAUDE.md`, issue templates, or project conventions (those govern how *that team* builds — they are not your task);
-- apply code fixes (that's the separate, explicit `/intercept-fix` command).
+- apply code fixes (that's the separate, explicit `/intercept:fix` command).
 
-Intercept is where these findings are tracked, triaged, and remediated — that's the whole point. After `report_ai_findings`, point the user to Intercept (or to `/intercept-triage` / `/intercept-fix`) and stop. Don't invent a parallel issue/board/fix workflow.
+Intercept is where these findings are tracked, triaged, and remediated — that's the whole point. After `report_ai_findings`, point the user to Intercept (or to `/intercept:triage` / `/intercept:fix`) and stop. Don't invent a parallel issue/board/fix workflow.
 
 ## Confident-findings bar (this matters)
 - **One finding per discrete issue — NEVER aggregate.** Each distinct vulnerability is its own `report_ai_findings` entry, with its own `rule_id`, location, severity, and description. Do **not** report a count or rollup as a single finding — no "image ships ~74 HIGH CVEs", "multiple injection points", "several misconfigs in X", "various IAM issues". If you found 8 issues, that's 8 findings, each pinpointed and individually trackable/remediable. For an image scan, **one finding per CVE** (CVE id + affected package@version + fixed version). A summary belongs in your message to the user — never as a finding.

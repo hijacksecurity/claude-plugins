@@ -1,6 +1,6 @@
 ---
 name: triaging-intercept-findings
-description: Verify open Intercept findings by reading the code and following the data/taint flow, classify each as true/false/unknown, and write the verdict back via update_finding_status. Works on both scanner and AI findings. Use for /intercept-triage or when the user asks to verify, triage, or clear false positives.
+description: Verify open Intercept findings by reading the code and following the data/taint flow, classify each as true/false/unknown, and write the verdict back via update_finding_status. Works on both scanner and AI findings. Use for /intercept:triage or when the user asks to verify, triage, or clear false positives.
 ---
 
 # Triaging Intercept findings
@@ -18,7 +18,7 @@ Load `using-intercept-mcp` first (especially the **`resolution_id` ≠ `id`** ru
    - `notes` = a **factual** justification (≤4000 chars): what you checked and why it's a FP / why it's real. No `reasoning`/`confidence` fields — the justification goes in `notes` as prose, keep your chain-of-thought in the conversation.
    - When several findings share a verdict (e.g. a whole rule firing as FP across files), use `bulk_update_finding_status(resolution_ids, status, notes)` (≤500 ids).
    - For a real finding you're leaving open (e.g. needs a fix, not just a status), use `comment_on_finding(resolution_id, note)` to record the triage without closing it.
-5. **Summarize** — counts by verdict, the FPs you cleared, and the confirmed-real findings worth fixing (hand those to `/intercept-fix`).
+5. **Summarize** — counts by verdict, the FPs you cleared, and the confirmed-real findings worth fixing (hand those to `/intercept:fix`).
 
 ## Discipline
 - Be conservative marking `false_positive` — only when you've actually traced the code and the finding is wrong. "Looks noisy" is not a verdict. When you can't tell, leave it `open` with a `comment_on_finding` note rather than guessing.
