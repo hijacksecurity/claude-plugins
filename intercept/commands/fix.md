@@ -5,9 +5,14 @@ description: Fix a specific Intercept finding end-to-end — verify, apply the f
 Fix the specified finding using the **fixing-intercept-findings** skill (load **using-intercept-mcp** first).
 
 Steps:
-1. Locate the finding (by the id/description below), capturing its `file_path`, line, and `resolution_id`.
+1. Locate the finding (by the id/description below) — `list_findings` finds any type; capture its **`resolution_id`**, its **`remediation`** (the fix guidance), and — for code-located findings — its `file_path` + line. Works for every category (code, container/image, pipeline, infrastructure, packages, platform), not just code findings.
 2. Verify it's real; if it's a false positive, mark it `false_positive` and stop.
-3. Propose the minimal root-cause fix, apply the edit, and prove it (run the project's tests / a targeted test / build). For a secret, confirm removal and remind the user to rotate it.
+3. Apply the fix the finding's type calls for, driven by its `remediation`:
+   - **Code-located** (sast / iac / dockerfile-source / pipeline — has a `file_path`+line): edit the code at that location — the minimal root-cause fix.
+   - **Image CVE** (container, `location_kind=image_cve`, no source line): the fix is an **upgrade, not a code edit** — bump/repin the base image in the relevant Dockerfile (`FROM` → patched tag/digest) and/or add the package upgrade per `remediation`, then rebuild.
+   - **Dependency CVE** (packages / sbom_vuln): bump the package version in the manifest (requirements.txt / package.json / go.mod …) to the fixed version in `remediation`.
+   - **Platform**: apply the repo/org config or settings change in `remediation` (may be a platform setting, not a repo edit — guide the user if so).
+   Then **prove it** (project tests / a targeted test / build). For a secret, confirm removal and remind the user to rotate it.
 4. Mark `update_finding_status(resolution_id, "fixed", notes="<what changed + how verified>")`, then optionally `trigger_scan` to let the scanners confirm closure.
 5. Report the fix, the verification result, and the new status.
 
