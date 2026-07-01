@@ -42,6 +42,7 @@ connected — it won't leave you stuck.
 | Command | What it does |
 |---|---|
 | `/intercept:posture` | Score, grade, finding breakdown, and what's driving it |
+| `/intercept:advise` | Verify this repo's AI Advisors against your local code; per-rec verdict with evidence (report-only) |
 | `/intercept:scan` | Deep AI scan supplementing your scanners; records new findings |
 | `/intercept:triage` | Verify open findings, clear false positives, confirm real ones |
 | `/intercept:fix <finding>` | Fix a finding end-to-end and mark it resolved |
