@@ -1,6 +1,6 @@
 {
   "name": "intercept",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Intercept security for Claude Code — deep AI security scans that supplement your scanners and write findings back to the Intercept platform as your system of record. Targets what rules-based scanners can't reach: container image contents, cloud/infra posture, and cross-file/interprocedural logic.",
   "homepage": "https://intercept.hijacksecurity.com",
   "author": {
