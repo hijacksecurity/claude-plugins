@@ -12,7 +12,7 @@ Steps:
    - **Image CVE** (container, `location_kind=image_cve`, no source line): the fix is an **upgrade, not a code edit** — bump/repin the base image in the relevant Dockerfile (`FROM` → patched tag/digest) and/or add the package upgrade per `remediation`, then rebuild.
    - **Dependency CVE** (packages / sbom_vuln): bump the package version in the manifest (requirements.txt / package.json / go.mod …) to the fixed version in `remediation`.
    - **Platform**: apply the repo/org config or settings change in `remediation` (may be a platform setting, not a repo edit — guide the user if so).
-   Then **prove it** (project tests / a targeted test / build). For a secret, confirm removal and remind the user to rotate it.
+   Then **prove it** (project tests / a targeted test / build). For a secret, confirm removal and remind the user to rotate it. **If the fix touched any `.github/workflows/**` file, run `actionlint` on it and it MUST pass before you mark the finding fixed** — a malformed `${{ }}` still parses as YAML but causes a GitHub Actions `startup_failure`. If `actionlint` isn't installed, install it (or fall back to `yamllint` and note that in the resolution); never declare a workflow edit done while `actionlint` reports errors.
 4. Mark `update_finding_status(resolution_id, "fixed", notes="<what changed + how verified>")`, then optionally `trigger_scan` to let the scanners confirm closure.
 5. Report the fix, the verification result, and the new status.
 
